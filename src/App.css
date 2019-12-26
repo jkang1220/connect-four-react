@@ -3,16 +3,16 @@ body {
 }
 
 .title {
-	width: 20rem;
+	width: 25rem;
 	font-size: 3rem;
 	margin: 0 auto;
 	padding: 30px 0;
+	text-transform: uppercase;
 }
 
 .action-bar {
 	width: 12rem;
 	margin: 0 auto;
-	padding-bottom: 30px;
 }
 
 .new-game-button {

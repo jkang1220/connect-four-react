@@ -1,35 +1,31 @@
 .players-bar {
-	width: 40rem;
+	width: 62rem;
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
-	margin-top: 0;
-	margin-bottom: 5rem;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .player {
 	height: 40px;
-
 }
 
 .player-name {
-	font-size: 2rem;
+	display: table-cell;
+    vertical-align: middle;
+	font-size: 1.2rem;
 	height: 40px;
-}
-
-.player-avatar {
-	margin: 0 auto;
-	height: 70px;
-	width: 70px;
+	height: 100px;
+	width: 100px;
 	border-radius: 50%;
-	background-color:purple;
+	text-align: center;
+	text-transform: uppercase;
 }
 
 .player1 {
 	background-color:royalblue;
 }
+
 .player2 {
 	background-color:#888888;
 }
