@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styles from './App.css';
+import ActionBar from './Components/ActionBar';
 import Board from './Components/Board';
-import Players from './Components/Players';
+import Modal from './Components/Modal';
 
-// 6 rows
-// 7 columns
-const initialState = [
+const getNewBoard = () => [
 	[0,0,0,0,0,0],
 	[0,0,0,0,0,0],
 	[0,0,0,0,0,0],
@@ -14,7 +13,6 @@ const initialState = [
 	[0,0,0,0,0,0],
 	[0,0,0,0,0,0],
 ];
-
 const getNextPlayer = currentPlayer => currentPlayer === 1 ? 2 : 1;
 const getUpdatedBoard = (board, currentPlayer, colIdx, rowIdx) => {
 	const newBoard = board.slice();
@@ -24,8 +22,10 @@ const getUpdatedBoard = (board, currentPlayer, colIdx, rowIdx) => {
 };
 
 const App = () => {
-	const [board, setBoard] = useState(initialState);
+	const newBoard = getNewBoard();
+	const [board, setBoard] = useState(newBoard);
 	const [currentPlayer, setCurrentPlayer] = useState(1);
+	const [modalState, setModalState] = useState(true);
 
 	const onColumnClick = (colIdx, rowIdx) => {
 		const newBoard = getUpdatedBoard(board, currentPlayer, colIdx, rowIdx);
@@ -35,19 +35,25 @@ const App = () => {
 		setCurrentPlayer(nextPlayer);
 	}
 
+	const startNewGame = () => {
+		setBoard(newBoard);
+		setModalState(false);
+		setCurrentPlayer(1);
+	}
+
 	return (<div>
 		<h1 className="title">Connect Four</h1>
-		<div className="action-bar">
-			<button
-				onClick={() => setBoard(initialState)}
-				className="new-game-button"
-			>
-				New Game
-			</button>
-		</div>
-		<Players
-			currentPlayer={currentPlayer}
-		/>
+		{ modalState ? <Modal>
+				<button
+					onClick={startNewGame}
+					className="new-game-button"
+				>
+					Let's Play!
+				</button>
+			</Modal> : null}
+					{ !modalState ?
+					<ActionBar startNewGame={startNewGame}/> : null
+			}
 		<Board
 			board={board}
 			onColumnClick={onColumnClick}

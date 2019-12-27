@@ -1,16 +1,9 @@
-body {
-	background-color:goldenrod;
+.action-bar {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 5rem;
 }
 
-.title {
-	width: 25rem;
-	font-size: 3rem;
-	margin: 0 auto;
-	padding: 30px 0;
-	text-transform: uppercase;
-}
-
-/* duplicate css */
 .new-game-button {
 	color: white;
 	font-size: 1rem;
@@ -25,7 +18,7 @@ body {
 	display: inline-block;
 	transition: all 0.3s ease 0s;
 }
-/* duplicate css */
+
 .new-game-button:hover {
 	color: white;
 	font-size: 1rem;
