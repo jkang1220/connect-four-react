@@ -1,0 +1,8 @@
+.board {
+	padding: 2rem;
+	width: 40rem;
+	background-color: #1e2935;
+	margin: 0 auto;
+	display: flex;
+    justify-content: space-between;
+}
