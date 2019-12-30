@@ -9,9 +9,13 @@
 }
 
 .modal-content {
-	display: relative;
+	height: 10rem;
+    width: 18rem;
+	background-color:white;
 	position: absolute;
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 1rem;
 }
