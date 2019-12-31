@@ -2,8 +2,7 @@ import React from 'react';
 import Column from './Column';
 import './Board.css';
 
-const Board = props => {
-    const { currentPlayer, board, onColumnClick, columnHeights } = props;
+const Board = ({ board, onColumnClick }) => {
     return (
         <div className="board">
             <Column

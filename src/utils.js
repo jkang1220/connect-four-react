@@ -11,15 +11,12 @@ const checkConnectFour = quad => {
     return null;
 };
 
-//returns 1,2, or null
 const checkQuadruples = group => {
-    let winner = null;
-
     for (let startIdx = 0; startIdx + 3 < group.length; startIdx++) {
         let quadruple = group.slice(startIdx, startIdx + 4);
-        const res = checkConnectFour(quadruple);
-        if (res) {
-            return res;
+        const winner = checkConnectFour(quadruple);
+        if (winner) {
+            return winner;
         }
     }
 
@@ -27,8 +24,8 @@ const checkQuadruples = group => {
 };
 
 const checkRows = board => {
-    const rows = board[0].length; //6
-    const columns = board.length; //7
+    const rows = board[0].length;
+    const columns = board.length;
 
     for (let k = 0; k < rows; k++) {
         const row = [];
@@ -45,7 +42,6 @@ const checkRows = board => {
 };
 
 const checkColumns = board => {
-    const rows = board[0].length;
     const columns = board.length;
 
     for (let i = 0; i < columns; i++) {
@@ -67,9 +63,7 @@ const checkColumns = board => {
 
 const checkDiagonals = board => {
     const rows = board[0].length;
-    const columns = board.length;
 
-    // check for connect four in diagonals;
     for (let rowIterator = rows + 2; rowIterator > 2; rowIterator--) {
         const diagonal = [];
         let COLUMN_INDEX = 0;
@@ -94,7 +88,6 @@ const checkDiagonals = board => {
         }
     }
 
-    // check for connect four in reverse diagonal;
     for (let rowIterator = -rows + 3; rowIterator < rows - 3; rowIterator++) {
         const diagonal = [];
         let COLUMN_INDEX = 0;
@@ -140,7 +133,7 @@ const getWinner = board => {
     return null;
 };
 
-export default {
+export {
     getWinner,
     checkDiagonals,
     checkRows,

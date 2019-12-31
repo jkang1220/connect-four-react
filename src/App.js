@@ -4,7 +4,7 @@ import TurnCard from './Components/TurnCard';
 import Board from './Components/Board';
 import Modal from './Components/Modal';
 import Button from './Components/Button';
-import algo from './Components/algo';
+import { getWinner } from './utils';
 
 const getNewBoard = () => [
     [0, 0, 0, 0, 0, 0],
@@ -56,14 +56,13 @@ const App = () => {
                 columnHeights,
                 colIdx
             );
-            const winningPlayer = algo.getWinner(board);
+            const winningPlayer = getWinner(board);
 
             setBoard(newBoard);
             setColumnHeights(newColumnHeights);
             if (winningPlayer) {
                 setWinner(true);
             } else {
-                //get the winner here before toggling to the next player
                 setCurrentPlayer(nextPlayer);
             }
         }
@@ -89,17 +88,13 @@ const App = () => {
                 ) : null}
             </div>
             <div className="page-main-content">
-                <Board
-                    board={board}
-                    onColumnClick={onColumnClick}
-                    currentPlayer={currentPlayer}
-                />
+                <Board board={board} onColumnClick={onColumnClick} />
                 <TurnCard currentPlayer={currentPlayer} />
             </div>
             {winner ? (
                 <Modal>
                     <h2 className="winner-modal-content">
-                        Player {currentPlayer} WON!!!!
+                        Player {currentPlayer} WON!
                     </h2>
                     <Button
                         onClick={startNewGame}
@@ -111,8 +106,5 @@ const App = () => {
         </div>
     );
 };
-
-//7 across
-//6 across
 
 export default App;

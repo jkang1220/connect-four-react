@@ -11,10 +11,10 @@ const getPieceClass = value => {
     return 'grid-column-circle';
 };
 
-const ColumnItem = props => {
+const ColumnItem = ({ value }) => {
     return (
         <div className="grid-column-item">
-            <div className={getPieceClass(props.value)}></div>
+            <div className={getPieceClass(value)}></div>
         </div>
     );
 };
