@@ -51,7 +51,7 @@ const App = () => {
 	const [board, setBoard] = useState(newBoard);
 	const [columnHeights, setColumnHeights] = useState(newColumns);
 	const [currentPlayer, setCurrentPlayer] = useState(1);
-	const [winner, setWinner] = useState(false);
+	const [winner, setWinner] = useState(true);
 
 	const onColumnClick = (colIdx) => {
 		const spacesLeftInColumn = columnHeights[colIdx] < 5;
@@ -85,11 +85,11 @@ const App = () => {
 	return (<div>
 		<h1 className="page-title">Connect Four</h1>
 		<div className="page-action-bar">
-			<Button
+			{ !winner ? <Button
 				onClick={startNewGame}
 				className="new-game-button"
 				text="New Game"
-			/>
+			/> : null}
 		</div>
 		<div className="page-main-content">
 			<Board

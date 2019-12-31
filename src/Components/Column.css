@@ -3,3 +3,7 @@
 	justify-content: flex-start;
 	flex-direction: column;
 }
+
+.grid-row:hover {
+	background-color: #293848
+}
