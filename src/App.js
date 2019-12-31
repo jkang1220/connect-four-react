@@ -63,7 +63,6 @@ const App = () => {
 			const nextPlayer = getNextPlayer(currentPlayer);
 			const newColumnHeights = getUpdatedColumnHeights(columnHeights, colIdx);
 			const winningPlayer = getWinner(board);
-
 			setBoard(newBoard);
 			setColumnHeights(newColumnHeights);
 			if (winningPlayer) {

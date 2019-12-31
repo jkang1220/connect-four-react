@@ -1,4 +1,5 @@
 import helpers from '../Components/algo';
+import fixtures from './fixtures';
 
 const {
 	getWinner,
@@ -8,6 +9,15 @@ const {
 	checkConnectFour,
 	checkQuadruples,
 } = helpers;
+
+const {
+	boardsWithConnectFourRows,
+	boardsWithoutConnectFourRows,
+	boardsWithConnectFourColumns,
+	boardsWithoutConnectFourColumns,
+	boardsWithConnectFourDiagonals,
+	boardsWithoutConnectFourDiagonals
+} = fixtures;
 
 describe('checkConnectFour',() => {
 	test('returns null if all pieces are 0', () => {
@@ -42,80 +52,69 @@ describe('checkQuadruples', () => {
 
 describe('checkColumns', () => {
 	test('returns the correct player who has a connect four given a set of pieces', () => {
-		expect(checkColumns([2,1,1,1,1,0])).toBe(1);
-		expect(checkColumns([1,2,1,1,1,1])).toBe(1);
-		expect(checkColumns([2,2,2,2,0,0])).toBe(2);
-		expect(checkColumns([2,2,2,2,0])).toBe(2);
+		boardsWithConnectFourColumns.forEach(({ board, expectedResult }) => {
+			 expect(checkColumns(board)).toBe(expectedResult);
+		});
 	});
-	test('returns null if no player has a connect four given a set of pieces', () => {
-		expect(checkColumns([2,1,1,2,1])).toBe(null);
-		expect(checkColumns([2,1,2,1,1])).toBe(null);
-		expect(checkColumns([2,1,2,1,0,0])).toBe(null);
-		expect(checkColumns([1,2,2,2,0,0])).toBe(null);
+	test('returns null if no connect fours are found in columns', () => {
+		boardsWithoutConnectFourColumns.forEach(({ board, expectedResult }) => {
+			 expect(checkColumns(board)).toBe(expectedResult);
+		});
 	});
 });
 
-//diagonal
-const winnerPlayer1aDiagonal = [
-  [1, 0, 0, 0, 0, 0],
-  [2, 1, 0, 0, 0, 0],
-  [2, 2, 1, 0, 0, 0],
-  [1, 2, 2, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0]
-];
+describe('checkRows', () => {
+	test('returns the correct player who has a connect four given a set of pieces', () => {
+		boardsWithConnectFourRows.forEach(({ board, expectedResult }) => {
+			 expect(checkRows(board)).toBe(expectedResult);
+		});
+	});
 
-//vertical
-const winnerPlayer1bColumn = [
-  [1, 1, 1, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [1, 1, 2, 0, 0, 0],
-  [2, 2, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0]
-];
-//horizontal
-const winnerPlayer1cRow = [
-  [1, 2, 1, 1, 0, 0],
-  [1, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0],
-  [1, 1, 2, 0, 0, 0],
-  [2, 2, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0]
-];
+	test('returns null if no connect fours are found in rows', () => {
+		boardsWithoutConnectFourRows.forEach(({ board, expectedResult }) => {
+			 expect(checkRows(board)).toBe(expectedResult);
+		});
+	});
+});
 
-//horizontal
-const winnerPlayer2aRow = [
-  [2, 1, 1, 1, 0, 0],
-  [2, 0, 0, 0, 0, 0],
-  [2, 0, 0, 0, 0, 0],
-  [2, 1, 2, 0, 0, 0],
-  [1, 2, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0]
-];
+describe('checkDiagonals', () => {
+	test('returns the correct player who has a connect four given a set of pieces', () => {
+		boardsWithConnectFourDiagonals.forEach(({ board, expectedResult }) => {
+			 expect(checkDiagonals(board)).toBe(expectedResult);
+		});
+	});
 
-//vertical
-const winnerPlayer2bColumn = [
-  [2, 1, 2, 1, 0, 0],
-  [2, 2, 2, 2, 0, 0],
-  [2, 0, 0, 0, 0, 0],
-  [2, 1, 2, 0, 0, 0],
-  [1, 2, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0]
-];
+	test('returns null if no connect fours are found in diagonals', () => {
+		boardsWithoutConnectFourDiagonals.forEach(({ board, expectedResult }) => {
+			 expect(checkDiagonals(board)).toBe(expectedResult);
+		});
+	});
+});
 
-//diagonal
-const winnerPlayer2cDiagonal = [
-  [2, 1, 2, 1, 0, 0],
-  [1, 2, 1, 2, 0, 0],
-  [2, 1, 2, 0, 0, 0],
-  [2, 1, 2, 2, 0, 0],
-  [1, 2, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0]
-];
+
+describe('getWinner', () => {
+	test('returns the correct winner', () => {
+		boardsWithConnectFourDiagonals.forEach(({ board, expectedResult }) => {
+			 expect(getWinner(board)).toBe(expectedResult);
+		});
+		boardsWithConnectFourColumns.forEach(({ board, expectedResult }) => {
+			 expect(getWinner(board)).toBe(expectedResult);
+		});
+		boardsWithConnectFourRows.forEach(({ board, expectedResult }) => {
+			 expect(getWinner(board)).toBe(expectedResult);
+		});
+	});
+
+	test('returns null if tie', () => {
+		boardsWithoutConnectFourDiagonals.forEach(({ board, expectedResult }) => {
+			 expect(getWinner(board)).toBe(expectedResult);
+		});
+		boardsWithoutConnectFourColumns.forEach(({ board, expectedResult }) => {
+			 expect(getWinner(board)).toBe(expectedResult);
+		});
+		boardsWithoutConnectFourRows.forEach(({ board, expectedResult }) => {
+			 expect(getWinner(board)).toBe(expectedResult);
+		});
+	});
+});
+getWinner
