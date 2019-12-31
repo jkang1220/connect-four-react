@@ -1,19 +1,18 @@
-
 .grid-column-item {
-	padding: 0.5rem 0.65rem;
+    padding: 0.5rem 0.65rem;
 }
 
 .grid-column-circle {
-	box-shadow: 2px 3px #888888;
-	background-color:#334152;
-	border-radius: 50%;
-	width: 4rem;
-	height: 4rem;
+    box-shadow: 2px 3px #888888;
+    background-color: #334152;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
 }
 
 .player1 {
-	background-color:royalblue;
+    background-color: royalblue;
 }
 .player2 {
-	background-color:#888888;
+    background-color: #888888;
 }

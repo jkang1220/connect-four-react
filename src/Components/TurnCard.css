@@ -3,25 +3,25 @@
     color: white;
     font-size: 1.3rem;
     padding: 0rem 1.5rem;
-	height: 11.0rem;
-    width: 12.0rem;
+    height: 11rem;
+    width: 12rem;
 }
 
 .turn-header {
-	text-align: center;
+    text-align: center;
 }
 
 .player-piece {
-	border-radius: 50%;
-	width: 4rem;
-	height: 4rem;
- 	margin-left: auto;
-	margin-right: auto;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .player1 {
-	background-color:royalblue;
+    background-color: royalblue;
 }
 .player2 {
-	background-color:#888888;
+    background-color: #888888;
 }

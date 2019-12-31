@@ -1,20 +1,20 @@
 .grid-row-item {
-	padding: 0.5rem 0.65rem;
+    padding: 0.5rem 0.65rem;
 }
 
 .grid-row-circle {
-	box-shadow: 3px 5px #888888;
-	background-color:#334152;
-	border-radius: 50%;
-	width: 4.375rem;
-	height: 4.375rem;
+    box-shadow: 3px 5px #888888;
+    background-color: #334152;
+    border-radius: 50%;
+    width: 4.375rem;
+    height: 4.375rem;
 }
 
 .player1 {
-	background-color:royalblue;
-	box-shadow: none;
+    background-color: royalblue;
+    box-shadow: none;
 }
 .player2 {
-	background-color:#888888;
-	box-shadow: none;
+    background-color: #888888;
+    box-shadow: none;
 }
