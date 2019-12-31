@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ColumnItem.css';
+import './ColumnItem.css';
 
 const getPieceClass = (value) => {
 	if (value === 1) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Space.css';
+import './Space.css';
 
 const Space = () => (
 	<div className="grid-row-item">

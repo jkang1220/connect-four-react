@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ColumnItem from './ColumnItem';
-import styles from './Column.css';
+import './Column.css';
 
 const Column = (props) => {
 	const { colIdx, columnValues } = props;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Column from './Column';
-import styles from './Board.css';
+import './Board.css';
 
 const Board = (props) => {
 	const { currentPlayer, board, onColumnClick, columnHeights } = props;

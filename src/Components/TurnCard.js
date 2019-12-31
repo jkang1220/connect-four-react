@@ -1,5 +1,5 @@
 import React from 'react';
-import styles2 from './TurnCard.css';
+import './TurnCard.css';
 
 const playerNames = ['PLAYER 1', 'PLAYER 2'];
 const TurnCard = (props) => {

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import styles from './App.css';
+import './App.css';
 import TurnCard from './Components/TurnCard';
 import Board from './Components/Board';
 import Modal from './Components/Modal';
 import Button from './Components/Button';
+import algo from './Components/algo';
 
 const getNewBoard = () => [
 	[0,0,0,0,0,0],
@@ -31,27 +32,13 @@ const getUpdatedColumnHeights = (columnHeights, colIdx) => {
 	return newHeights;
 }
 
-const getWinner = (board) => {
-// 0: (6) [0, 0, 0, 0, 0, 0]
-// 1: (6) [0, 0, 0, 0, 0, 0]
-// 2: (6) [0, 0, 0, 0, 0, 0]
-// 3: (6) [2, 2, 2, 0, 0, 0]
-// 4: (6) [1, 1, 1, 1, 0, 0]
-// 5: (6) [0, 0, 0, 0, 0, 0]
-// 6: (6) [0, 0, 0, 0, 0, 0]
-
-	//tie, player1 or player2
-	//return 0, 1 or 2
-	return null;
-}
-
 const App = () => {
 	const newBoard = getNewBoard();
 	const newColumns = getNewColumns();
 	const [board, setBoard] = useState(newBoard);
 	const [columnHeights, setColumnHeights] = useState(newColumns);
 	const [currentPlayer, setCurrentPlayer] = useState(1);
-	const [winner, setWinner] = useState(true);
+	const [winner, setWinner] = useState(false);
 
 	const onColumnClick = (colIdx) => {
 		const spacesLeftInColumn = columnHeights[colIdx] < 5;
@@ -59,10 +46,9 @@ const App = () => {
 		if (spacesLeftInColumn) {
 			const getCurrentRowIdx = columnHeights[colIdx];
 			const newBoard = getUpdatedBoard(board, currentPlayer, colIdx, getCurrentRowIdx + 1);
-			console.log(newBoard, 'newBoardz');
 			const nextPlayer = getNextPlayer(currentPlayer);
 			const newColumnHeights = getUpdatedColumnHeights(columnHeights, colIdx);
-			const winningPlayer = getWinner(board);
+			const winningPlayer = algo.getWinner(board);
 
 			setBoard(newBoard);
 			setColumnHeights(newColumnHeights);
