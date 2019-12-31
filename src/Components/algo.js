@@ -6,8 +6,6 @@ const checkConnectFour = (quad) => {
   return null;
 }
 
-
-
 //returns 1,2, or null
 const checkQuadruples = (group) => {
   let winner = null;
