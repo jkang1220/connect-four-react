@@ -3,7 +3,7 @@ import Column from './Column';
 import styles from './Board.css';
 
 const Board = (props) => {
-	const { currentPlayer, board, onColumnClick } = props;
+	const { currentPlayer, board, onColumnClick, columnHeights } = props;
 return (
 	<div className="board">
 		<Column colIdx={0} columnValues={board[0]} onColumnClick={onColumnClick}/>
