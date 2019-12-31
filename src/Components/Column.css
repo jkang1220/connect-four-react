@@ -1,9 +1,9 @@
 .grid-row {
-	display: flex;
-	justify-content: flex-start;
-	flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 .grid-row:hover {
-	background-color: #293848
+    background-color: #293848;
 }
