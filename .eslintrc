@@ -5,10 +5,10 @@
         "es6": true
     },
     "plugins": ["import"],
-    "extends": ["plugin:prettier/recommended"],
+    "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaVersion": 2018
     },
     "rules": {
         "no-console": "warn",

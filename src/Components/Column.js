@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ColumnItem from './ColumnItem';
 import './Column.css';
 
-const Column = ({ colIdx, columnValues, onColumnClick }) => (
+const Column = ({ colIdx, column, onColumnClick }) => (
     <div className="grid-row" onClick={() => onColumnClick(colIdx)}>
-        <ColumnItem value={columnValues[5]} />
-        <ColumnItem value={columnValues[4]} />
-        <ColumnItem value={columnValues[3]} />
-        <ColumnItem value={columnValues[2]} />
-        <ColumnItem value={columnValues[1]} />
-        <ColumnItem value={columnValues[0]} />
+        <ColumnItem value={column[5]} />
+        <ColumnItem value={column[4]} />
+        <ColumnItem value={column[3]} />
+        <ColumnItem value={column[2]} />
+        <ColumnItem value={column[1]} />
+        <ColumnItem value={column[0]} />
     </div>
 );
 

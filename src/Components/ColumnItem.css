@@ -3,7 +3,7 @@
 }
 
 .grid-column-circle {
-    box-shadow: 2px 3px #888888;
+    box-shadow: 3px 5px #131921;
     background-color: #334152;
     border-radius: 50%;
     width: 4rem;
@@ -12,7 +12,9 @@
 
 .player1 {
     background-color: royalblue;
+    box-shadow: none;
 }
 .player2 {
     background-color: #888888;
+    box-shadow: none;
 }

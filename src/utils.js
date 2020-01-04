@@ -1,3 +1,40 @@
+//PLAYER RELATED HELPERS
+const getNextPlayer = currentPlayer => (currentPlayer === 1 ? 2 : 1);
+
+//BOARD RELATED HELPERS
+const generateBoard = (rows, columns) => {
+    let board = [];
+    for (let i = 0; i < columns; i++) {
+        let column = [];
+        for (let j = 0; j < rows; j++) {
+            column.push(0);
+        }
+        board.push(column);
+    }
+
+    return board;
+};
+
+const getNewColumns = () => [-1, -1, -1, -1, -1, -1, -1];
+const getUpdatedBoard = (board, currentPlayer, colIdx, rowIdx) => {
+    const newBoard = board.slice();
+
+    newBoard[colIdx][rowIdx] = currentPlayer;
+    return newBoard;
+};
+
+const getUpdatedColumnHeights = (columnHeights, colIdx) => {
+    if (columnHeights[colIdx] !== undefined) {
+        const newHeights = columnHeights.slice();
+
+        newHeights[colIdx] =
+            newHeights[colIdx] >= 5 ? 5 : newHeights[colIdx] + 1;
+        return newHeights;
+    }
+    return columnHeights;
+};
+
+//WINNER DETECTION HELPERS
 const checkConnectFour = quad => {
     if (
         quad[0] === quad[1] &&
@@ -134,7 +171,12 @@ const getWinner = board => {
 };
 
 export {
+    generateBoard,
+    getNewColumns,
+    getNextPlayer,
     getWinner,
+    getUpdatedBoard,
+    getUpdatedColumnHeights,
     checkDiagonals,
     checkRows,
     checkColumns,
