@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import TurnCard from './Components/TurnCard';
 import Board from './Components/Board';
 import Modal from './Components/Modal';
@@ -12,22 +11,23 @@ import {
     getUpdatedColumnHeights,
     getWinner,
 } from './utils';
+import './App.css';
 
 const App = () => {
     const newBoard = generateBoard(6, 7);
     const newColumns = getNewColumns();
     const [board, setBoard] = useState(newBoard);
     const [columnHeights, setColumnHeights] = useState(newColumns);
-    const [currentPlayer, setCurrentPlayer] = useState(1);
+    const [player, setPlayer] = useState(1);
     const [winner, setWinner] = useState(false);
 
     const onColumnClick = colIdx => {
         const spacesLeftInColumn = columnHeights[colIdx] < 5;
 
         if (spacesLeftInColumn) {
-            const getCurrentRowIdx = columnHeights[colIdx];
-            const newBoard = getUpdatedBoard(board, currentPlayer, colIdx, getCurrentRowIdx + 1);
-            const nextPlayer = getNextPlayer(currentPlayer);
+            const getCurrentColumnHeight = columnHeights[colIdx];
+            const newBoard = getUpdatedBoard(board, player, colIdx, getCurrentColumnHeight + 1);
+            const nextPlayer = getNextPlayer(player);
             const newColumnHeights = getUpdatedColumnHeights(columnHeights, colIdx);
             const winningPlayer = getWinner(board);
 
@@ -36,7 +36,7 @@ const App = () => {
             if (winningPlayer) {
                 setWinner(true);
             } else {
-                setCurrentPlayer(nextPlayer);
+                setPlayer(nextPlayer);
             }
         }
     };
@@ -45,7 +45,7 @@ const App = () => {
         setWinner(false);
         setColumnHeights(newColumns);
         setBoard(newBoard);
-        setCurrentPlayer(1);
+        setPlayer(1);
     };
 
     return (
@@ -58,11 +58,11 @@ const App = () => {
             </div>
             <div className="page-main-content">
                 <Board board={board} onColumnClick={onColumnClick} />
-                <TurnCard currentPlayer={currentPlayer} />
+                <TurnCard player={player} />
             </div>
             {winner ? (
                 <Modal>
-                    <h2 className="winner-modal-content">Player {currentPlayer} WON!</h2>
+                    <h2 className="winner-modal-content">Player {player} Won!</h2>
                     <Button onClick={startNewGame} className="new-game-button" text="New Game" />
                 </Modal>
             ) : null}

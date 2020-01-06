@@ -4,7 +4,8 @@ import './ColumnItem.css';
 const getPlayerClass = value => {
     if (value === 1) {
         return 'player1';
-    } else if (value === 2) {
+    }
+    if (value === 2) {
         return 'player2';
     }
 

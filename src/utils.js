@@ -5,30 +5,29 @@ const getNextPlayer = currentPlayer => (currentPlayer === 1 ? 2 : 1);
 const generateBoard = (rows, columns) => {
     let board = [];
     for (let i = 0; i < columns; i++) {
-        let column = [];
+        let col = [];
         for (let j = 0; j < rows; j++) {
-            column.push(0);
+            col.push(0);
         }
-        board.push(column);
+        board.push(col);
     }
 
     return board;
 };
 
 const getNewColumns = () => [-1, -1, -1, -1, -1, -1, -1];
-const getUpdatedBoard = (board, currentPlayer, colIdx, rowIdx) => {
+const getUpdatedBoard = (board, player, col, row) => {
     const newBoard = board.slice();
 
-    newBoard[colIdx][rowIdx] = currentPlayer;
+    newBoard[col][row] = player;
     return newBoard;
 };
 
-const getUpdatedColumnHeights = (columnHeights, colIdx) => {
-    if (columnHeights[colIdx] !== undefined) {
+const getUpdatedColumnHeights = (columnHeights, col) => {
+    if (columnHeights[col] !== undefined) {
         const newHeights = columnHeights.slice();
 
-        newHeights[colIdx] =
-            newHeights[colIdx] >= 5 ? 5 : newHeights[colIdx] + 1;
+        newHeights[col] = newHeights[col] >= 5 ? 5 : newHeights[col] + 1;
         return newHeights;
     }
     return columnHeights;
@@ -36,12 +35,7 @@ const getUpdatedColumnHeights = (columnHeights, colIdx) => {
 
 //WINNER DETECTION HELPERS
 const checkConnectFour = quad => {
-    if (
-        quad[0] === quad[1] &&
-        quad[2] === quad[3] &&
-        quad[0] === quad[2] &&
-        quad[0] !== 0
-    ) {
+    if (quad[0] === quad[1] && quad[2] === quad[3] && quad[0] === quad[2] && quad[0] !== 0) {
         return quad[0];
     }
 
@@ -49,8 +43,8 @@ const checkConnectFour = quad => {
 };
 
 const checkQuadruples = group => {
-    for (let startIdx = 0; startIdx + 3 < group.length; startIdx++) {
-        let quadruple = group.slice(startIdx, startIdx + 4);
+    for (let i = 0; i + 3 < group.length; i++) {
+        let quadruple = group.slice(i, i + 4);
         const winner = checkConnectFour(quadruple);
         if (winner) {
             return winner;
@@ -61,12 +55,12 @@ const checkQuadruples = group => {
 };
 
 const checkRows = board => {
-    const rows = board[0].length;
-    const columns = board.length;
+    const numOfRows = board[0].length;
+    const numOfCols = board.length;
 
-    for (let k = 0; k < rows; k++) {
+    for (let k = 0; k < numOfRows; k++) {
         const row = [];
-        for (let j = 0; j < columns; j++) {
+        for (let j = 0; j < numOfCols; j++) {
             row.push(board[j][k]);
         }
 
@@ -79,19 +73,13 @@ const checkRows = board => {
 };
 
 const checkColumns = board => {
-    const columns = board.length;
+    const numOfCols = board.length;
 
-    for (let i = 0; i < columns; i++) {
+    for (let i = 0; i < numOfCols; i++) {
         let column = board[i];
-        for (
-            let colStartIdx = 0;
-            colStartIdx + 3 < column.length;
-            colStartIdx++
-        ) {
-            const winner = checkQuadruples(column);
-            if (winner) {
-                return winner;
-            }
+        const winner = checkQuadruples(column);
+        if (winner) {
+            return winner;
         }
     }
 
@@ -99,24 +87,19 @@ const checkColumns = board => {
 };
 
 const checkDiagonals = board => {
-    const rows = board[0].length;
+    const numOfRows = board[0].length;
+    const numOfCols = board.length;
 
-    for (let rowIterator = rows + 2; rowIterator > 2; rowIterator--) {
+    for (let i = numOfRows + 2; i > 2; i--) {
         const diagonal = [];
-        let COLUMN_INDEX = 0;
-
-        let ROW_INDEX = rowIterator;
-        while (ROW_INDEX !== -1) {
-            if (
-                COLUMN_INDEX >= 0 &&
-                ROW_INDEX >= 0 &&
-                COLUMN_INDEX < 7 &&
-                ROW_INDEX < 6
-            ) {
-                diagonal.push(board[COLUMN_INDEX][ROW_INDEX]);
+        let col_idx = 0;
+        let row_idx = i;
+        while (row_idx !== -1) {
+            if (row_idx >= 0 && col_idx < numOfCols && row_idx < numOfRows) {
+                diagonal.push(board[col_idx][row_idx]);
             }
-            COLUMN_INDEX++;
-            ROW_INDEX--;
+            col_idx++;
+            row_idx--;
         }
 
         const winner = checkQuadruples(diagonal);
@@ -125,27 +108,23 @@ const checkDiagonals = board => {
         }
     }
 
-    for (let rowIterator = -rows + 3; rowIterator < rows - 3; rowIterator++) {
+    for (let rowIterator = -numOfRows + 3; rowIterator < numOfRows - 3; rowIterator++) {
         const diagonal = [];
-        let COLUMN_INDEX = 0;
-        let ROW_INDEX = rowIterator;
+        let col_idx = 0;
+        let row_idx = rowIterator;
 
-        while (ROW_INDEX < rows) {
-            if (
-                COLUMN_INDEX >= 0 &&
-                ROW_INDEX >= 0 &&
-                COLUMN_INDEX < 7 &&
-                ROW_INDEX < 6
-            ) {
-                diagonal.push(board[COLUMN_INDEX][ROW_INDEX]);
+        while (row_idx < numOfRows) {
+            if (col_idx < numOfCols && row_idx >= 0 && row_idx < numOfRows) {
+                diagonal.push(board[col_idx][row_idx]);
             }
-            COLUMN_INDEX++;
-            ROW_INDEX++;
+            col_idx++;
+            row_idx++;
         }
 
-        const winner2 = checkQuadruples(diagonal);
-        if (winner2) {
-            return winner2;
+        const winner = checkQuadruples(diagonal);
+
+        if (winner) {
+            return winner;
         }
     }
 
@@ -154,15 +133,16 @@ const checkDiagonals = board => {
 
 const getWinner = board => {
     const winnerByColumn = checkColumns(board);
-    const winnerByRow = checkRows(board);
-    const winnerByDiagonal = checkDiagonals(board);
-
     if (winnerByColumn) {
         return winnerByColumn;
     }
+
+    const winnerByRow = checkRows(board);
     if (winnerByRow) {
         return winnerByRow;
     }
+
+    const winnerByDiagonal = checkDiagonals(board);
     if (winnerByDiagonal) {
         return winnerByDiagonal;
     }
