@@ -13,16 +13,19 @@ import {
 } from './utils';
 import './App.css';
 
+const numberOfColumns = 7;
+const numberOfRows = 6;
+
 const App = () => {
-    const newBoard = generateBoard(6, 7);
-    const newColumns = getNewColumns();
+    const newBoard = generateBoard(numberOfRows, numberOfColumns);
+    const newColumns = getNewColumns(numberOfColumns);
     const [board, setBoard] = useState(newBoard);
     const [columnHeights, setColumnHeights] = useState(newColumns);
     const [player, setPlayer] = useState(1);
     const [winner, setWinner] = useState(false);
 
     const onColumnClick = colIdx => {
-        const spacesLeftInColumn = columnHeights[colIdx] < 5;
+        const spacesLeftInColumn = columnHeights[colIdx] < numberOfRows - 1;
 
         if (spacesLeftInColumn) {
             const getCurrentColumnHeight = columnHeights[colIdx];

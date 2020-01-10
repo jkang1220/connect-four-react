@@ -15,7 +15,7 @@ const generateBoard = (rows, columns) => {
     return board;
 };
 
-const getNewColumns = () => [-1, -1, -1, -1, -1, -1, -1];
+const getNewColumns = numOfColumns => new Array(numOfColumns).fill(-1);
 const getUpdatedBoard = (board, player, col, row) => {
     const newBoard = board.slice();
 
@@ -151,15 +151,15 @@ const getWinner = board => {
 };
 
 export {
+    checkDiagonals,
+    checkRows,
+    checkColumns,
+    checkConnectFour,
+    checkQuadruples,
     generateBoard,
     getNewColumns,
     getNextPlayer,
     getWinner,
     getUpdatedBoard,
     getUpdatedColumnHeights,
-    checkDiagonals,
-    checkRows,
-    checkColumns,
-    checkConnectFour,
-    checkQuadruples,
 };

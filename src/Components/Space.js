@@ -2,8 +2,8 @@ import React from 'react';
 import './Space.css';
 
 const Space = () => (
-    <div className="grid-row-item">
-        <div className="grid-row-circle"></div>
+    <div className="grid-space">
+        <div className="grid-space-circle"></div>
     </div>
 );
 
